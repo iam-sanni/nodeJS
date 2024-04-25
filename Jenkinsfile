@@ -9,19 +9,9 @@ pipeline {
             sh 'npm version'
           }
         }
-        stage('Install') { 
-            steps {
-              sh 'npm install'
-            }
-        }
-        stage('Build') { 
-            steps {
-                sh 'npm run build' 
-            }
-        }
         stage('codedeploy'){
           steps {
-            step([$class: 'AWSCodeDeployPublisher', applicationName: 'nodejs-application', deploymentGroupAppspec: false, deploymentGroupName: 'nodejs-application-DG', excludes: '', iamRoleArn: '', includes: 'dist/', proxyHost: '', proxyPort: 0, region: 'ap-south-1', s3bucket: 'deploymasters-nodejs', s3prefix: '', subdirectory: '', versionFileName: '', waitForCompletion: false])
+            step([$class: 'AWSCodeDeployPublisher', applicationName: 'sample-app', deploymentGroupAppspec: false, deploymentGroupName: 'sample-app', excludes: '', iamRoleArn: '', includes: 'dist/', proxyHost: '', proxyPort: 0, region: 'us-east-1', s3bucket: 'deploymasters-nodejs', s3prefix: '', subdirectory: '', versionFileName: '', waitForCompletion: false])
            }
         }
     }
